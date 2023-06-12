@@ -1,0 +1,77 @@
+.btn {
+  padding: 0.5rem;
+  background: #80e8d0;
+  border: none;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  top: -0.5rem;
+  left: -0.5rem;
+  right: -0.5rem;
+  bottom: -0.5rem;
+  border: 5px solid rgba(224, 224, 224, 1);
+  border-radius: 1.2rem;
+}
+
+.BR {
+  position: absolute;
+  width: calc(50% + 0.5rem);
+  height: calc(50% + 0.5rem);
+  bottom: -19%;
+  left: 50%;
+  z-index: 1;
+  border-bottom-right-radius: 1rem;
+  border-bottom: 5px solid;
+  border-right: 5px solid;
+  border-color: #80e8d0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.TR {
+  position: absolute;
+  width: calc(50% + 0.5rem);
+  height: calc(50% + 0.5rem);
+  top: -19%;
+  left: 50%;
+  z-index: 1;
+  border-top-right-radius: 1rem;
+  border-top: 5px solid;
+  border-right: 5px solid;
+  border-color: #80e8d0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.TL {
+  position: absolute;
+  width: calc(50% + 0.5rem);
+  height: calc(50% + 0.5rem);
+  top: -19%;
+  right: 50%;
+  z-index: 1;
+  border-top-left-radius: 1rem;
+  border-top: 5px solid;
+  border-left: 5px solid;
+  border-color: #80e8d0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.BL {
+  position: absolute;
+  width: calc(50% + 0.5rem);
+  height: calc(50% + 0.5rem);
+  bottom: -19%;
+  right: 50%;
+  z-index: 1;
+  border-bottom-left-radius: 1rem;
+  border-bottom: 5px solid;
+  border-left: 5px solid;
+  border-color: #80e8d0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
