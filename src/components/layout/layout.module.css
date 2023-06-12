@@ -20,6 +20,16 @@
   right: -50rem;
 }
 
+.innerCircle::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  position: absolute;
+  background: white;
+}
+
 .borderedRect {
   width: 20rem;
   height: 20rem;
@@ -56,9 +66,19 @@
   align-self: flex-end;
 }
 
+@media (orientation: landscape) {
+  .layout {
+    overflow-y: auto;
+  }
+
+  .innerCircle {
+    height: 110vh;
+  }
+}
+
 @media screen and (min-width: 780px) {
   .layout {
-    height: 120vh;
+    height: 150vh;
   }
 
   .innerCircle {
