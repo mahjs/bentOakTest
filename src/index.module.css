@@ -8,7 +8,7 @@
 @font-face {
   font-family: "IRANsans";
   font-style: normal;
-  src: local("IRANsans"), url(@/assets/fonts/IRANsans.ttf);
+  src: local("IRANsans"), url(./assets/fonts/IRANsans.ttf) format("ttf");
 }
 
 * {
