@@ -1,0 +1,12 @@
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 0.8rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
