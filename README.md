@@ -11,7 +11,6 @@ A simple Front-End test
 
 ## Instruction and guilds
 
-**Note**
 **Warning**
 For using the app if you are in Iran country, unfortunately you must tuen your VPN on for
 api call to work;
