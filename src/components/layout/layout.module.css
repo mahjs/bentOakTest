@@ -68,7 +68,8 @@
 
 @media (orientation: landscape) {
   .layout {
-    overflow-y: auto;
+    height: 140vh;
+    overflow-y: scroll;
   }
 
   .innerCircle {
@@ -76,9 +77,10 @@
   }
 }
 
-@media screen and (min-width: 780px) {
+@media screen and (min-width: 900px) {
   .layout {
-    height: 150vh;
+    height: 120vh;
+    overflow-y: hidden;
   }
 
   .innerCircle {
