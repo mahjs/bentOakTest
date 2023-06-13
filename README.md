@@ -30,7 +30,7 @@ api call to work;
     the server automatically will be started. And then enjoy.
 
 **Note**
-if you want to see the app online without downloading the repo [just visit this link]()
+if you want to see the app online without downloading the repo [just visit this link](https://lambent-mooncake-12de8c.netlify.app/)
 
 **Note**
 For state managemenet we could use Redux or Mobx, but for simplicity I use `React.useState and` `React.useEffect`
