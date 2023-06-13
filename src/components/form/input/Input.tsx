@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({
   required,
   registery,
   onChange,
-}: InputProps) => {
+}) => {
   const [clicked, setClicked] = useState<boolean>(false);
 
   return (

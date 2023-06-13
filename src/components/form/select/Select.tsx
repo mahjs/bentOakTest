@@ -6,32 +6,30 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useState } from "react";
-import { Controller, UseFormRegister } from "react-hook-form";
+import { Controller, Control } from "react-hook-form";
 import { FormValues } from "../Form";
 
-interface SelectProps {
+interface MyCustomSelectProps {
   options: { id: number; name: string }[];
   label: string;
   placeHolder: string;
   onSelect: (city: string) => void;
   selectedOption: any;
-  registery: UseFormRegister<FormValues>;
   name: "city" | "state";
-  control: any;
+  control: Control<FormValues, any>;
   error: boolean;
 }
 
-const MyCustomSelect: React.FC<SelectProps> = ({
+const MyCustomSelect: React.FC<MyCustomSelectProps> = ({
   options,
   label,
   placeHolder,
   onSelect,
   selectedOption,
-  registery,
   name,
   control,
   error,
-}: SelectProps) => {
+}) => {
   const [clicked, setClicked] = useState<boolean>(false);
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -46,7 +44,6 @@ const MyCustomSelect: React.FC<SelectProps> = ({
         <FormControl>
           {clicked && <InputLabel>{clicked ? label : ""}</InputLabel>}
           <Select
-            id={`${name}_id`}
             error={error}
             onFocus={() => setClicked(true)}
             defaultValue={placeHolder}

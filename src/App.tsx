@@ -16,7 +16,7 @@ const cacheRtl = createCache({
   stylisPlugins: [prefixer, stylisRTLPlugin],
 });
 
-function App() {
+function App(): JSX.Element {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>

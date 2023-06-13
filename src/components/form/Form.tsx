@@ -35,6 +35,7 @@ const Form: React.FC = () => {
       .min(10, "کد پستی باید ۱۰ رقم باشید")
       .max(10, "کد پستی باید ۱۰ رقم باشد"),
   });
+
   const {
     control,
     register,
@@ -44,14 +45,17 @@ const Form: React.FC = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
   });
+
   const [states, setStates] = useState<State[]>([]);
   const [cities, setCities] = useState<City[]>([]);
 
+  // Here we can use Redux or useReducer, But for simplicity I use useState;
   const [selectedState, setselectedState] = useState<string | null>(null);
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [enteredEmail, setEnteredEmail] = useState<string | null>(null);
   const [enteredPostCode, setEnteredPostCode] = useState<string | null>(null);
 
+  // We could use a custom hook here...
   useEffect(() => {
     fetch("https://iran-locations-api.vercel.app/api/v1/states")
       .then((res) => res.json())
@@ -103,7 +107,6 @@ const Form: React.FC = () => {
           selectedOption={selectedState}
           placeHolder="اسم استانت رو انتخاب کن"
           label="اسم استان"
-          registery={register}
           error={errors.state ? true : false}
           onSelect={(state) => {
             setselectedState(state);
@@ -122,7 +125,6 @@ const Form: React.FC = () => {
           selectedOption={selectedCity}
           placeHolder="اسم شهرت رو انتخاب کن"
           label="نام شهر"
-          registery={register}
           error={errors.city ? true : false}
           onSelect={(city) => setSelectedCity(city)}
         />

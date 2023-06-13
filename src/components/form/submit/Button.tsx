@@ -1,7 +1,8 @@
+import { MouseEventHandler } from "react";
 import classes from "./button.module.css";
 
 interface ButtonProps {
-  onClickHandler: any;
+  onClickHandler: MouseEventHandler<HTMLButtonElement> | undefined;
   type: "button" | "submit" | "reset";
   topRigth: boolean;
   topLeft: boolean;
@@ -16,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   topLeft,
   bottomLeft,
   bottomRigth,
-}: ButtonProps) => {
+}) => {
   return (
     <button className={classes.btn} type={type} onClick={onClickHandler}>
       <svg
