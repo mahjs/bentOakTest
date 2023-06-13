@@ -39,6 +39,7 @@ const Form: React.FC = () => {
   const {
     control,
     register,
+    watch,
     reset,
     formState: { errors },
     handleSubmit,
@@ -49,17 +50,17 @@ const Form: React.FC = () => {
   const [states, setStates] = useState<State[]>([]);
   const [cities, setCities] = useState<City[]>([]);
 
-  // Here we can use Redux or useReducer, But for simplicity I use useState;
-  const [selectedState, setselectedState] = useState<string | null>(null);
-  const [selectedCity, setSelectedCity] = useState<string | null>(null);
-  const [enteredEmail, setEnteredEmail] = useState<string | null>(null);
-  const [enteredPostCode, setEnteredPostCode] = useState<string | null>(null);
+  const selectedState = watch("state");
+  const selectedCity = watch("city");
+  const enteredEmail = watch("email");
+  const enteredPostCode = watch("postCode");
 
   // We could use a custom hook here...
   useEffect(() => {
     fetch("https://iran-locations-api.vercel.app/api/v1/states")
       .then((res) => res.json())
-      .then((data: State[]) => setStates(data));
+      .then((data: State[]) => setStates(data))
+      .catch((e) => console.log("Faild to fetch"));
   }, []);
 
   useEffect(() => {
@@ -68,16 +69,13 @@ const Form: React.FC = () => {
       `https://iran-locations-api.vercel.app/api/v1/cities?state=${selectedState}`
     )
       .then((res) => res.json())
-      .then((data) => setCities(data.cities));
+      .then((data) => setCities(data.cities))
+      .catch((e) => console.log("Faild to fetch"));
   }, [selectedState]);
 
   const onSubmit = (data: any) => {
     console.log(data);
     reset();
-    setSelectedCity(null);
-    setselectedState(null);
-    setEnteredEmail(null);
-    setEnteredPostCode(null);
   };
 
   return (
@@ -93,7 +91,6 @@ const Form: React.FC = () => {
           lable="آدرس ایمیل"
           registery={register}
           error={errors.email ? true : false}
-          onChange={(e) => setEnteredEmail(e.target.value)}
         />
         {errors.email && (
           <Typography variant="inherit" color="red">
@@ -108,10 +105,6 @@ const Form: React.FC = () => {
           placeHolder="اسم استانت رو انتخاب کن"
           label="اسم استان"
           error={errors.state ? true : false}
-          onSelect={(state) => {
-            setselectedState(state);
-            setSelectedCity(null);
-          }}
         />
         {errors.state && (
           <Typography variant="inherit" color="red">
@@ -126,7 +119,6 @@ const Form: React.FC = () => {
           placeHolder="اسم شهرت رو انتخاب کن"
           label="نام شهر"
           error={errors.city ? true : false}
-          onSelect={(city) => setSelectedCity(city)}
         />
         {errors.city && (
           <Typography variant="inherit" color="red">
@@ -139,7 +131,6 @@ const Form: React.FC = () => {
           lable="کد پستی"
           registery={register}
           error={errors.postCode ? true : false}
-          onChange={(e) => setEnteredPostCode(e.target.value)}
         />
         {errors.postCode && (
           <Typography variant="inherit" color="red">

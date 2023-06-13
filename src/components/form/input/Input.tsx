@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { FormValues } from "../Form";
 
@@ -10,7 +10,6 @@ interface InputProps {
   error?: boolean;
   required?: boolean;
   registery: UseFormRegister<FormValues>;
-  onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -20,7 +19,6 @@ const Input: React.FC<InputProps> = ({
   error,
   required,
   registery,
-  onChange,
 }) => {
   const [clicked, setClicked] = useState<boolean>(false);
 
@@ -34,10 +32,6 @@ const Input: React.FC<InputProps> = ({
         onFocus={() => setClicked(true)}
         label={clicked || error ? lable : null}
         placeholder={placeHolder}
-        onChange={(e) => {
-          registery(type).onChange(e);
-          onChange(e);
-        }}
         fullWidth
         InputProps={{
           style: {

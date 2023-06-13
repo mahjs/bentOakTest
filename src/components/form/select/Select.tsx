@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import { Controller, Control } from "react-hook-form";
 import { FormValues } from "../Form";
@@ -13,7 +7,6 @@ interface MyCustomSelectProps {
   options: { id: number; name: string }[];
   label: string;
   placeHolder: string;
-  onSelect: (city: string) => void;
   selectedOption: any;
   name: "city" | "state";
   control: Control<FormValues, any>;
@@ -24,17 +17,12 @@ const MyCustomSelect: React.FC<MyCustomSelectProps> = ({
   options,
   label,
   placeHolder,
-  onSelect,
   selectedOption,
   name,
   control,
   error,
 }) => {
   const [clicked, setClicked] = useState<boolean>(false);
-
-  const handleChange = (event: SelectChangeEvent) => {
-    onSelect(event.target.value);
-  };
 
   return (
     <Controller
@@ -49,10 +37,6 @@ const MyCustomSelect: React.FC<MyCustomSelectProps> = ({
             defaultValue={placeHolder}
             value={selectedOption || placeHolder}
             label={clicked ? label : ""}
-            onChange={(e) => {
-              field.onChange(e);
-              handleChange(e);
-            }}
             sx={{
               width: "100%",
               borderRadius: "1rem",
