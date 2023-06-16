@@ -90,6 +90,7 @@ const Form: React.FC = () => {
     setValue("city", "");
   };
 
+  const numberOfValidInputs = getNumberOfValidInputs(getFieldState);
   return (
     <div dir="rtl" className={classes.formWrapper}>
       <h1>همین اول کار امتیاز بگیر!</h1>
@@ -148,10 +149,10 @@ const Form: React.FC = () => {
           </Typography>
         )}
         <Button
-          bottomRigth={getNumberOfValidInputs(getFieldState) >= 1}
-          topRigth={getNumberOfValidInputs(getFieldState) >= 2}
-          topLeft={getNumberOfValidInputs(getFieldState) >= 3}
-          bottomLeft={getNumberOfValidInputs(getFieldState) >= 4}
+          bottomRigth={numberOfValidInputs >= 1}
+          topRigth={numberOfValidInputs >= 2}
+          topLeft={numberOfValidInputs >= 3}
+          bottomLeft={numberOfValidInputs >= 4}
           onClickHandler={handleSubmit(onSubmit)}
           type="submit"
         />
