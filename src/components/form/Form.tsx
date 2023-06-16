@@ -18,6 +18,8 @@ const emailRegex = new RegExp(
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
 
+// const getNumberOFVAlid;
+
 const Form: React.FC = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -63,7 +65,7 @@ const Form: React.FC = () => {
       .then((res) => res.json())
       .then((data: State[]) => setStates(data))
       .catch((e) => console.log("Faild to fetch"));
-  }, []);
+  }, [setValue]);
 
   useEffect(() => {
     if (!selectedState) return;
@@ -80,7 +82,7 @@ const Form: React.FC = () => {
         setCities([]);
         console.log("Faild to fetch");
       });
-  }, [selectedState]);
+  }, [selectedState, setValue]);
 
   const onSubmit = (data: any) => {
     console.log(data);
