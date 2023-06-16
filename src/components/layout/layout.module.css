@@ -1,6 +1,6 @@
 .layout {
   width: 100vw;
-  height: 110vh;
+  height: 130vh;
   background: linear-gradient(to bottom, #fdc350, #ff9b1a);
   overflow: hidden;
   position: absolute;
@@ -68,12 +68,12 @@
 
 @media (orientation: landscape) {
   .layout {
-    height: 140vh;
+    height: 200vh;
     overflow-y: scroll;
   }
 
   .innerCircle {
-    height: 110vh;
+    height: 130vh;
   }
 }
 
