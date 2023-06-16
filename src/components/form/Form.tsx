@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import classes from "./form.module.css";
 import Input from "./input/Input";
 import MyCustomSelect from "./select/Select";
@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
+import { getNumberOfValidInputs } from "./utils/formStates";
 
 export interface FormValues {
   email: string;
@@ -17,8 +18,6 @@ export interface FormValues {
 const emailRegex = new RegExp(
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
-
-// const getNumberOFVAlid;
 
 const Form: React.FC = () => {
   const validationSchema = Yup.object().shape({
@@ -43,6 +42,7 @@ const Form: React.FC = () => {
     register,
     watch,
     reset,
+    getFieldState,
     setValue,
     formState: { errors },
     handleSubmit,
@@ -50,13 +50,12 @@ const Form: React.FC = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  // This watch() if for real time observation of inputs
+  watch();
   const [states, setStates] = useState<State[]>([]);
   const [cities, setCities] = useState<City[]>([]);
 
   const selectedState = watch("state");
-  const selectedCity = watch("city");
-  const enteredEmail = watch("email");
-  const enteredPostCode = watch("postCode");
 
   // We could use a custom hook here...
   useEffect(() => {
@@ -149,10 +148,10 @@ const Form: React.FC = () => {
           </Typography>
         )}
         <Button
-          bottomRigth={!errors.email && !!enteredEmail}
-          bottomLeft={!errors.postCode && !!enteredPostCode}
-          topRigth={!!selectedState}
-          topLeft={!!selectedCity}
+          bottomRigth={getNumberOfValidInputs(getFieldState) >= 1}
+          topRigth={getNumberOfValidInputs(getFieldState) >= 2}
+          topLeft={getNumberOfValidInputs(getFieldState) >= 3}
+          bottomLeft={getNumberOfValidInputs(getFieldState) >= 4}
           onClickHandler={handleSubmit(onSubmit)}
           type="submit"
         />
