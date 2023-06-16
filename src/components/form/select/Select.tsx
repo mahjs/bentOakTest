@@ -7,7 +7,6 @@ interface MyCustomSelectProps {
   options: { id: number; name: string }[];
   label: string;
   placeHolder: string;
-  selectedOption: any;
   name: "city" | "state";
   control: Control<FormValues, any>;
   error: boolean;
@@ -17,7 +16,6 @@ const MyCustomSelect: React.FC<MyCustomSelectProps> = ({
   options,
   label,
   placeHolder,
-  selectedOption,
   name,
   control,
   error,
@@ -32,10 +30,11 @@ const MyCustomSelect: React.FC<MyCustomSelectProps> = ({
         <FormControl>
           {clicked && <InputLabel>{clicked ? label : ""}</InputLabel>}
           <Select
+            {...field}
             error={error}
             onFocus={() => setClicked(true)}
             defaultValue={placeHolder}
-            value={selectedOption || placeHolder}
+            value={field.value || placeHolder}
             label={clicked ? label : ""}
             sx={{
               width: "100%",

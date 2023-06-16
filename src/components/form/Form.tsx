@@ -41,6 +41,7 @@ const Form: React.FC = () => {
     register,
     watch,
     reset,
+    setValue,
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>({
@@ -57,6 +58,7 @@ const Form: React.FC = () => {
 
   // We could use a custom hook here...
   useEffect(() => {
+    setValue("city", "");
     fetch("https://iran-locations-api.vercel.app/api/v1/states")
       .then((res) => res.json())
       .then((data: State[]) => setStates(data))
@@ -65,17 +67,26 @@ const Form: React.FC = () => {
 
   useEffect(() => {
     if (!selectedState) return;
+    setValue("city", "");
     fetch(
       `https://iran-locations-api.vercel.app/api/v1/cities?state=${selectedState}`
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("oops");
+        return res.json();
+      })
       .then((data) => setCities(data.cities))
-      .catch((e) => console.log("Faild to fetch"));
+      .catch((e) => {
+        setCities([]);
+        console.log("Faild to fetch");
+      });
   }, [selectedState]);
 
   const onSubmit = (data: any) => {
     console.log(data);
     reset();
+    setValue("state", "");
+    setValue("city", "");
   };
 
   return (
@@ -101,7 +112,6 @@ const Form: React.FC = () => {
           name="state"
           control={control}
           options={states}
-          selectedOption={selectedState}
           placeHolder="اسم استانت رو انتخاب کن"
           label="اسم استان"
           error={errors.state ? true : false}
@@ -115,7 +125,6 @@ const Form: React.FC = () => {
           name="city"
           control={control}
           options={cities}
-          selectedOption={selectedCity}
           placeHolder="اسم شهرت رو انتخاب کن"
           label="نام شهر"
           error={errors.city ? true : false}
